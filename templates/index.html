@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Event Feedback Management System</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>Event Feedback System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
 <header>
-    <h1>Event Feedback Management System</h1>
+<h1>Event Feedback Management System</h1>
 </header>
 
 <nav>
-    <ul>
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('events') }}">Events</a></li>
-        <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
-        <li><a href="{{ url_for('admin_login') }}">Admin Login</a></li>
-    </ul>
+<ul>
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('events') }}">Events</a></li>
+<li><a href="{{ url_for('feedback') }}">Feedback</a></li>
+
+{% if session.get("admin_logged_in") %}
+<li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% else %}
+<li><a href="{{ url_for('admin_login') }}">Admin</a></li>
+{% endif %}
+
+</ul>
 </nav>
 
 <main>
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Collect. Analyze. Improve.</h2>
-            <p>
-                A complete platform to gather event feedback and improve
-                future experiences through structured response collection.
-            </p>
-            <a href="{{ url_for('feedback') }}" class="btn">Give Feedback</a>
-        </div>
-    </section>
+
+<section class="events-container">
+
+<h2>Welcome</h2>
+
+<p>
+This system allows users to submit feedback for events.
+The feedback is collected and stored in a database where
+administrators can review and export it for analysis.
+</p>
+
+</section>
+
 </main>
 
 <footer>
-    © 2026 Event Feedback System
+© 2026 Event Feedback System
 </footer>
 
 </body>
