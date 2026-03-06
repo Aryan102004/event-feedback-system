@@ -1,82 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin - All Feedback</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>View Feedback</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
 <header>
-    <h1>Admin Dashboard - Submitted Feedback</h1>
+<h1>Submitted Feedback</h1>
 </header>
 
 <nav>
-    <ul>
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('events') }}">Events</a></li>
-        <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
-        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-    </ul>
+<ul>
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('events') }}">Events</a></li>
+<li><a href="{{ url_for('feedback') }}">Feedback</a></li>
+<li><a href="{{ url_for('logout') }}">Logout</a></li>
+</ul>
 </nav>
 
-<main class="events-container">
+<main>
 
-    <!-- ===============================
-         EXPORT SECTION
-    ================================ -->
-    <div style="margin-bottom: 30px;">
-        
+<section class="events-container">
 
-        {% set events = feedbacks | map(attribute='event') | unique | list %}
+{% for fb in feedbacks %}
 
-        {% if events %}
-            {% for event in events %}
-                <a href="{{ url_for('export_csv', event_name=event) }}" class="btn" style="margin-right:10px; margin-top:10px;">
-                    Export {{ event }}
-                </a>
-            {% endfor %}
-        {% else %}
-            <p>No events available for export.</p>
-        {% endif %}
-    </div>
+<div class="event-card">
 
-    <!-- ===============================
-         FEEDBACK LIST
-    ================================ -->
+<h3>{{ fb.name }} ({{ fb.event }})</h3>
 
-    {% if feedbacks %}
-        {% for fb in feedbacks %}
-        <div class="event-card">
+<p><strong>Email:</strong> {{ fb.email }}</p>
 
-            <h3>{{ fb["name"] }} ({{ fb["email"] }})</h3>
-            <p><strong>Event:</strong> {{ fb["event"] }}</p>
-            <p><small>Submitted on: {{ fb["created_at"] }}</small></p>
+<p><strong>Liked:</strong> {{ fb.liked }}</p>
 
-            <hr>
+<p><strong>Improvement:</strong> {{ fb.improvement }}</p>
 
-            <p><strong>1. Relevance of the event theme:</strong> {{ fb["q1"] }}/5</p>
-            <p><strong>2. Quality & depth of content:</strong> {{ fb["q2"] }}/5</p>
-            <p><strong>3. Usefulness for skill enhancement:</strong> {{ fb["q3"] }}/5</p>
-            <p><strong>4. Subject expertise of resource person:</strong> {{ fb["q4"] }}/5</p>
-            <p><strong>5. Clarity of presentation:</strong> {{ fb["q5"] }}/5</p>
-            <p><strong>6. Audio-visual facilities:</strong> {{ fb["q6"] }}/5</p>
-            <p><strong>7. Knowledge enhancement:</strong> {{ fb["q7"] }}/5</p>
-            <p><strong>8. Overall rating:</strong> {{ fb["q8"] }}/5</p>
+<p><strong>Suggestion:</strong> {{ fb.suggestion }}</p>
 
-            <hr>
+</div>
 
-            <p><strong>9. What was liked most:</strong><br> {{ fb["liked"] }}</p>
-            <p><strong>10. Areas for improvement:</strong><br> {{ fb["improvement"] }}</p>
-            <p><strong>11. Suggestions:</strong><br> {{ fb["suggestion"] }}</p>
+{% endfor %}
 
-        </div>
-        {% endfor %}
-    {% else %}
-        <p style="text-align:center; font-weight:600;">No feedback submitted yet.</p>
-    {% endif %}
+</section>
 
 </main>
+
+<footer>
+© 2026 Event Feedback System
+</footer>
 
 </body>
 </html>
