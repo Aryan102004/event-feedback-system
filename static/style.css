@@ -320,3 +320,13 @@ footer {
     border-radius: 8px;
     margin-bottom: 20px;
 }
+
+nav ul li a.admin-btn {
+    background: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+
+
