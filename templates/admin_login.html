@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Login</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>Admin Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-<div class="feedback-section">
+<header>
+<h1>Admin Login</h1>
+</header>
 
-    <form method="POST" class="feedback-form">
-        <h2>Admin Login</h2>
+<main>
 
-        <label>Username</label>
-        <input type="text" name="username" required>
+<form class="feedback-form" method="POST">
 
-        <label>Password</label>
-        <input type="password" name="password" required>
+<h2>Login</h2>
 
-        <button type="submit">Login</button>
-    </form>
+<input type="text" name="username" placeholder="Username" required>
 
-</div>
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Login</button>
+
+</form>
+
+</main>
+
+<footer>
+© 2026 Event Feedback System
+</footer>
 
 </body>
 </html>
