@@ -1,75 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Events</title>
-   
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>Events</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
 <header>
-    <h1>Our Events</h1>
+<h1>Our Events</h1>
 </header>
 
 <nav>
-    <ul>
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('events') }}">Events</a></li>
-        <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
+<ul>
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('events') }}">Events</a></li>
+<li><a href="{{ url_for('feedback') }}">Feedback</a></li>
 
-        {% if session.get("admin_logged_in") %}
-        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        {% else %}
-        <li><a href="{{ url_for('admin_login') }}">Admin</a></li>
-        {% endif %}
-    </ul>
+{% if session.get("admin_logged_in") %}
+<li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% else %}
+<li><a href="{{ url_for('admin_login') }}">Admin</a></li>
+{% endif %}
+
+</ul>
 </nav>
 
 <main>
 
 <section class="events-container">
 
-    <div class="events-header">
-        <h2>Event List</h2>
+<div class="events-header">
+<h2>Event List</h2>
 
-        {% if session.get("admin_logged_in") %}
-        <button id="addEventBtn" class="btn-small">+ Add Event</button>
-        {% endif %}
+{% if session.get("admin_logged_in") %}
+<button id="addEventBtn" class="btn-small">+ Add Event</button>
+{% endif %}
 
-    </div>
+</div>
 
-    {% if session.get("admin_logged_in") %}
-    <div id="eventFormContainer" class="event-form-container hidden">
-        <h3>Add New Event</h3>
-        <input type="text" id="eventTitle" placeholder="Event Title">
-        <input type="date" id="eventDate">
-        <textarea id="eventDescription" placeholder="Event Description"></textarea>
-        <button id="saveEventBtn" class="btn-small">Save Event</button>
-    </div>
-    {% endif %}
+{% if session.get("admin_logged_in") %}
+<div id="eventFormContainer" class="event-form-container hidden">
 
-    <div id="eventsGrid" class="events-grid">
+<h3>Add New Event</h3>
 
-        <div class="event-card">
-            <h3>Tech Seminar 2026</h3>
-            <p>Date: March 10, 2026</p>
-            <p>Seminar on emerging technologies.</p>
-        </div>
+<input type="text" id="eventTitle" placeholder="Event Title">
 
-        <div class="event-card">
-            <h3>Web Development Workshop</h3>
-            <p>Date: April 5, 2026</p>
-            <p>Hands-on full stack workshop.</p>
-        </div>
+<input type="date" id="eventDate">
 
-    </div>
+<textarea id="eventDescription" placeholder="Event Description"></textarea>
+
+<button id="saveEventBtn" class="btn-small">Save Event</button>
+
+</div>
+{% endif %}
+
+<div class="events-grid">
+
+<div class="event-card">
+<h3>Tech Seminar 2026</h3>
+<p>Date: March 10, 2026</p>
+<p>Seminar on emerging technologies.</p>
+</div>
+
+<div class="event-card">
+<h3>Web Development Workshop</h3>
+<p>Date: April 5, 2026</p>
+<p>Hands-on full stack workshop.</p>
+</div>
+
+</div>
 
 </section>
 
 </main>
 
 <footer>
-    © 2026 Event Feedback System
+© 2026 Event Feedback System
 </footer>
 
 <script src="{{ url_for('static', filename='events.js') }}" defer></script>
