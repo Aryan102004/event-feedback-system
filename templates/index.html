@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Feedback Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Event Feedback Management System</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('events') }}">Events</a></li>
+        <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Collect. Analyze. Improve.</h2>
+            <p>
+                A complete platform to gather event feedback and improve
+                future experiences through structured response collection.
+            </p>
+            <a href="{{ url_for('feedback') }}" class="btn">Give Feedback</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    © 2026 Event Feedback System
+</footer>
+
+</body>
+</html>
