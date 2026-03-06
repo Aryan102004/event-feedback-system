@@ -15,6 +15,12 @@
         <li><a href="{{ url_for('home') }}">Home</a></li>
         <li><a href="{{ url_for('events') }}">Events</a></li>
         <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
+
+        {% if session.get("admin_logged_in") %}
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+        <li><a href="{{ url_for('admin_login') }}">Admin</a></li>
+        {% endif %}
     </ul>
 </nav>
 
@@ -24,9 +30,14 @@
 
     <div class="events-header">
         <h2>Event List</h2>
+
+        {% if session.get("admin_logged_in") %}
         <button id="addEventBtn" class="btn-small">+ Add Event</button>
+        {% endif %}
+
     </div>
 
+    {% if session.get("admin_logged_in") %}
     <div id="eventFormContainer" class="event-form-container hidden">
         <h3>Add New Event</h3>
         <input type="text" id="eventTitle" placeholder="Event Title">
@@ -34,6 +45,7 @@
         <textarea id="eventDescription" placeholder="Event Description"></textarea>
         <button id="saveEventBtn" class="btn-small">Save Event</button>
     </div>
+    {% endif %}
 
     <div id="eventsGrid" class="events-grid">
 
