@@ -1,160 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Submit Feedback</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<title>Submit Feedback</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
 <header>
-    <h1>Submit Feedback</h1>
+<h1>Event Feedback</h1>
 </header>
 
 <nav>
-    <ul>
-         <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('events') }}">Events</a></li>
-        <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
-    </ul>
+<ul>
+<li><a href="{{ url_for('home') }}">Home</a></li>
+<li><a href="{{ url_for('events') }}">Events</a></li>
+<li><a href="{{ url_for('feedback') }}">Feedback</a></li>
+
+{% if session.get("admin_logged_in") %}
+<li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% else %}
+<li><a href="{{ url_for('admin_login') }}">Admin</a></li>
+{% endif %}
+
+</ul>
 </nav>
 
 <main>
 
-<section class="feedback-section">
-{% if success %}
-<div style="background:#d4edda; color:#155724; padding:10px; border-radius:8px; margin-bottom:15px;">
-    Feedback submitted successfully!
-</div>
-{% endif %}
+<form class="feedback-form" method="POST" action="{{ url_for('submit_feedback') }}">
 
-   <form class="feedback-form" method="POST" action="{{ url_for('submit_feedback') }}">
+<h2>Submit Your Feedback</h2>
 
-    <h2>Event Feedback Form</h2>
+<input type="text" name="name" placeholder="Your Name" required>
 
-    <p class="scale-info">
-        Please rate the following on a scale of 1 to 5 <br>
-        (1 = Poor, 2 = Fair, 3 = Good, 4 = Very Good, 5 = Excellent)
-    </p>
+<input type="email" name="email" placeholder="Your Email" required>
 
-    <!-- Basic Details -->
-    <label>Name</label>
-    <input type="text" name="name" required>
+<select name="event" required>
+<option value="">Select Event</option>
+<option>Tech Seminar 2026</option>
+<option>Web Development Workshop</option>
+</select>
 
-    <label>Email</label>
-    <input type="email" name="email" required>
+<label>Overall Rating</label>
 
-    <label>Select Event</label>
-    <select name="event" required>
-        <option value="" disabled selected>Select Event</option>
-        <option>Tech Seminar 2026</option>
-        <option>Web Development Workshop</option>
-    </select>
+<select name="q8" required>
+<option value="">Select Rating</option>
+<option value="1">1 - Poor</option>
+<option value="2">2 - Fair</option>
+<option value="3">3 - Good</option>
+<option value="4">4 - Very Good</option>
+<option value="5">5 - Excellent</option>
+</select>
 
-    <!-- Rating Questions -->
+<textarea name="liked" placeholder="What did you like most?" required></textarea>
 
-    <label>1. Relevance of the event theme to your academic/professional needs</label>
-    <select name="q1" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
+<textarea name="improvement" placeholder="Areas for improvement" required></textarea>
 
-    <label>2. Quality and depth of content delivered</label>
-    <select name="q2" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
+<textarea name="suggestion" placeholder="Suggestions for future events" required></textarea>
 
-    <label>3. Usefulness of the event for knowledge/skill enhancement</label>
-    <select name="q3" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
-
-    <label>4. Subject expertise of the resource person(s)</label>
-    <select name="q4" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
-
-    <label>5. Clarity of presentation and communication</label>
-    <select name="q5" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
-
-    <label>6. Audio-visual and technical facilities</label>
-    <select name="q6" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
-
-    <label>7. The event enhanced my knowledge and skills</label>
-    <select name="q7" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
-
-    <label>8. Overall rating of the event</label>
-    <select name="q8" required>
-        <option value="" disabled selected>Select Rating</option>
-        <option value="1">1 - Poor</option>
-        <option value="2">2 - Fair</option>
-        <option value="3">3 - Good</option>
-        <option value="4">4 - Very Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
-
-    <!-- Descriptive Questions -->
-
-    <label>9. What aspects of the event did you like the most?</label>
-    <textarea name="liked" rows="3" required></textarea>
-
-    <label>10. Areas where the event can be improved</label>
-    <textarea name="improvement" rows="3" required></textarea>
-
-    <label>11. Suggestions for future events</label>
-    <textarea name="suggestion" rows="3" required></textarea>
-
-    <button type="submit">Submit Feedback</button>
+<button type="submit">Submit Feedback</button>
 
 </form>
-
-</section>
 
 </main>
 
 <footer>
-    © 2026 Event Feedback System
+© 2026 Event Feedback System
 </footer>
-<script src="{{ url_for('static', filename='feedback.js') }}" defer></script>
+
 </body>
 </html>
